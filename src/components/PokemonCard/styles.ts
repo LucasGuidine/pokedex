@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Type } from "../../@types/Pokemon.type";
+import { Type } from "../../@types/types";
 import { typesToColor } from "../../utils";
 
 interface ColorIdentificationByTypeProps {

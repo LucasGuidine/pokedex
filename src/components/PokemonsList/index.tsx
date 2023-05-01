@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Pokemon } from "../../@types/Pokemon.type";
+import { Pokemon } from "../../@types/types";
 import { PokemonCard } from "../PokemonCard";
 import * as Styled from "./styles";
 import { axiosInstance } from "../../services/axios";

@@ -1,4 +1,4 @@
-import { Pokemon } from "../../@types/Pokemon.type";
+import { Pokemon } from "../../@types/types";
 import { firstLetterUpperCase } from "../../utils";
 import * as Styled from "./styles";
 

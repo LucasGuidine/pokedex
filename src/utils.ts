@@ -1,4 +1,4 @@
-import { Pokemon, Type, TypeObject } from "./@types/Pokemon.type";
+import { Pokemon, Type, TypeObject } from "./@types/types";
 import { axiosInstance } from "./services/axios";
 import { theme } from "./theme/theme";
 
