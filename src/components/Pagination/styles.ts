@@ -11,6 +11,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 50px;
+  padding-bottom: 50px;
 `;
 
 export const Button = styled.div<ButtonProps>`

@@ -5,9 +5,9 @@ import { theme } from "../../theme/theme";
 const { fontColor, dragonTypeColor: blue, white, black } = theme.colors;
 
 interface PaginationProps {
-  pokemonsCount: number;
+  itensCount: number;
   currentPage: number;
-  pokemonsPerPage: number;
+  itensPerPage: number;
   setCurrentPage: (number: number) => void;
 }
 
@@ -23,12 +23,12 @@ interface PaginationProps {
 
 // Lucas Guidine 01-05-2023
 export const Pagination = ({
-  pokemonsCount,
+  itensCount,
   currentPage,
   setCurrentPage,
-  pokemonsPerPage,
+  itensPerPage,
 }: PaginationProps) => {
-  const pages = Math.floor(pokemonsCount / pokemonsPerPage) + 1;
+  const pages = Math.floor(itensCount / itensPerPage) + 1;
   return (
     <Styled.Container>
       {/* 1 parte da paginação */}

@@ -1,66 +1,80 @@
-import { useEffect, useState, useCallback } from "react";
-import { Pokemon } from "../../@types/types";
+import { useState } from "react";
 import { PokemonCard } from "../PokemonCard";
 import * as Styled from "./styles";
-import { axiosInstance } from "../../services/axios";
-import { formatPokemon } from "../../utils";
 import { Pagination } from "../Pagination";
 import { POKEMONS_PER_PAGE as pokemonsPerPage } from "../../constant";
+import usePagination from "../../hooks/usePagination";
 
 export const PokemonsList = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [pokemonsCount, setPokemonsCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [offsetValue, setOffsetValue] = useState(0);
+  // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  // const [pokemonsCount, setPokemonsCount] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [offsetValue, setOffsetValue] = useState(0);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { itensCount, currentPage, setCurrentPage, isLoading, pokemons } =
+    usePagination();
+  console.log("ajudaaaaaaaaaa", pokemons);
 
-  const getPokemons = useCallback(async () => {
-    setIsLoading(true);
+  const [searchPokemon, setSearchPokemon] = useState("");
 
-    const response: any = await axiosInstance.get(
-      `/pokemon?limit=${pokemonsPerPage}&offset=${offsetValue}`
-    );
-    setPokemonsCount(response.data.count);
+  // const [isLoading, setIsLoading] = useState(false);
 
-    const pokemons = response.data.results;
+  // const getPokemons = useCallback(async () => {
+  //   const response: any = await axiosInstance.get(
+  //     `/pokemon?limit=${pokemonsPerPage}&offset=${offsetValue}`
+  //   );
+  //   setPokemonsCount(response.data.count);
 
-    const formattedPokemons: Pokemon[] = await Promise.all(
-      pokemons.map(async (pokemon: any) => {
-        const formattedPokemon = await formatPokemon(pokemon);
-        return formattedPokemon;
-      })
-    );
-    setPokemons(formattedPokemons);
+  //   const pokemons = response.data.results;
 
-    setIsLoading(false);
-  }, [offsetValue]);
+  //   const formattedPokemons: Pokemon[] = await Promise.all(
+  //     pokemons.map(async (pokemon: any) => {
+  //       const formattedPokemon = await formatPokemon(pokemon);
+  //       return formattedPokemon;
+  //     })
+  //   );
+  //   setPokemons(formattedPokemons);
 
-  useEffect(() => {
-    if (currentPage === 1) {
-      setOffsetValue(0);
-      return;
-    }
-    setOffsetValue(pokemonsPerPage * currentPage - pokemonsPerPage);
-  }, [currentPage]);
+  //   setIsLoading(false);
+  // }, [offsetValue]);
 
-  useEffect(() => {
-    getPokemons();
-  }, [offsetValue, getPokemons]);
+  // useEffect(() => {
+  //   if (currentPage === 1) {
+  //     setOffsetValue(0);
+  //     return;
+  //   }
+  //   setOffsetValue(pokemonsPerPage * currentPage - pokemonsPerPage);
+  // }, [currentPage]);
+
+  // useEffect(() => {
+  //   getPokemons();
+  // }, [offsetValue, getPokemons]);
 
   return (
     <Styled.Container>
+      <Styled.SearchTitle>
+        Search for a pokemon:
+        <Styled.SearchInput
+          value={searchPokemon}
+          onChange={(e) => {
+            setSearchPokemon(e.target.value);
+          }}
+        />
+      </Styled.SearchTitle>
       {!isLoading && (
         <Styled.PokemonsContainer>
-          {pokemons.map((pokemon, idx) => (
-            <PokemonCard key={`${idx} - ${pokemon.name}`} pokemon={pokemon} />
-          ))}
+          {pokemons
+            .filter((e) =>
+              e.name.toUpperCase().includes(searchPokemon.toUpperCase())
+            )
+            .map((pokemon, idx) => (
+              <PokemonCard key={`${idx} - ${pokemon.name}`} pokemon={pokemon} />
+            ))}
         </Styled.PokemonsContainer>
       )}
-
       <Pagination
-        pokemonsPerPage={pokemonsPerPage}
-        pokemonsCount={pokemonsCount}
+        itensPerPage={pokemonsPerPage}
+        itensCount={itensCount}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
