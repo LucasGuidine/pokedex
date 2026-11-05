@@ -21,6 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "node scripts/obfuscate-build.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "javascript-obfuscator": "4.1.1"
   }
 }

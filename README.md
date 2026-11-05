@@ -27,6 +27,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
+The production build also obfuscates the generated JavaScript bundles and
+removes their source maps so the original source is not published with the
+deployment. Development builds started with `npm start` are not obfuscated.
+
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
