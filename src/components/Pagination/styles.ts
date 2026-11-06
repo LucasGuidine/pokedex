@@ -8,9 +8,11 @@ interface ButtonProps {
 
 export const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  gap: 8px;
+  margin: 50px auto 0;
 `;
 
 export const Button = styled.div<ButtonProps>`
@@ -21,7 +23,6 @@ export const Button = styled.div<ButtonProps>`
   border-radius: 25px;
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
-  margin-right: 20px;
   align-items: center;
   justify-content: center;
   ${(props) =>
@@ -29,4 +30,9 @@ export const Button = styled.div<ButtonProps>`
     `:hover {
     margin-top: -10px;
   }`}
+
+  @media (max-width: 480px) {
+    height: 36px;
+    width: 36px;
+  }
 `;
