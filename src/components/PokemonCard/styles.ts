@@ -15,14 +15,14 @@ export const Card = styled.div<CardProps>`
   flex-direction: column;
 
   height: 335px;
-  width: 198px;
+  width: min(198px, 100%);
 
   background: ${(props) => props.theme.colors.backgroundCard};
   border: 2px solid ${(props) => typesToColor(props.primaryType)};
   border-radius: 10px;
   box-shadow: 0px 3px 10px ${(props) => props.theme.colors.boxShadowCard};
 
-  margin-right: 100px;
+  justify-self: center;
 `;
 
 export const TopContainer = styled.div`
